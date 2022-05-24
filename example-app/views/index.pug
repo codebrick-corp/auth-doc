@@ -1,0 +1,26 @@
+html(lang="en")
+  include head.pug
+  body 
+    div(class="px-4 py-5 my-5 text-center")
+      h1(class="display-5 fw-bold") Example App
+      div(class="col-lg-6 mx-auto")
+        p.mb-4 This example shows how to use Tokotalk SSO service to identify the user. To start authorization flow, build authorization URL like following example and redirect the user to the location.
+
+        div.p-4.shadow.my-4.text-start
+          div 
+            span 
+            code #{auth_host}
+            span /auth?
+          div.ps-3 response_type=code
+          div.ps-3 &amp;client_id=
+            code your-client-id
+          div.ps-3 &amp;redirect_uri=
+            code your-redirect-uri
+          div.ps-3 &amp;scope=openid+profile
+          div.ps-3 &amp;state=
+            code your-state
+
+        p Click below button to start authorization flow. You will be redirected to the authorization server.
+
+        div(class="d-grid gap-2 d-sm-flex justify-content-sm-center")
+          a(class="btn btn-success btn-lg px-4 gap-3" href="/signin") Sign in with Athene

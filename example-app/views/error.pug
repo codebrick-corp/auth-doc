@@ -1,0 +1,10 @@
+html(lang="en")
+  include head.pug
+  body 
+    div.px-4.py-5.my-5.text-center
+      h1.display-5.fw-bold Something went wrong
+      div.col-lg-6.mx-auto
+        div.my-5 #{error}
+
+      div.d-grid.gap-2.d-sm-flex.justify-content-sm-center
+        a.btn.btn-secondary.btn-lg.px-4.gap-3(href="/") Back to start page

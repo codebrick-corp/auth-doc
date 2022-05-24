@@ -1,0 +1,28 @@
+html(lang="en")
+  include head.pug
+  body 
+    div(class="col-lg-8 mx-auto p-3 py-md-5")
+      h1 Your application is now authorized.
+      p The user was redirected back to your application and passed <code>code</code> and <code>state</code> parameters. The application checked <code>state</code> matches the one you provided before and exchanged <code>code</code> for tokens. The response from token endpoint looks like below.
+      div.p-4.my-2.shadow.rounded
+        div {
+        each val, key in response
+          div.col.ps-3.text-break "#{key}":"#{val}"
+        div }
+
+      h1 What should I do now?
+
+      p By verifying and parsing <code>id_token</code>, you can identify the user. Create a session or proceed to additional sign-up process if this is the user's first visit.
+      div.p-4.my-2.shadow.rounded
+        div {
+        each val, key in token_payload
+          div.col.ps-3.text-break "#{key}":"#{val}"
+        div }
+
+      p.small Using <code>access_token</code>, you can access user's resources on behalf of the user. (This authorization mechanism will be used later. For a while, we just need for SSO)
+
+      p.my-4 See /oauth_callback implementation for the details.
+
+      div.d-grid.gap-2.d-sm-flex.justify-content-sm-center
+        a.btn.btn-success.btn-lg.px-4.gap-3(href="/") Back to start page
+        a.btn.btn-secondary.btn-lg.px-4.gap-3(href=signout_url) Sign out
