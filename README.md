@@ -211,3 +211,49 @@ Parameters
 ## Example Application
 
 [example-app](./example-app/) is a simple node.js application to demonstrate how to integrate SSO into your application. Take a look for quick understanding.
+
+## Migrating existing user
+
+If your application has existing user accounts which were created before SSO is integrated, 
+you can create SSO accounts for them through following API.
+It will create a new account and respond its SSO ID.
+
+For authorization, the API must contain `CLIENT_ID` and `CLIENT_SECRET` in [Basic auth header](https://en.wikipedia.org/wiki/Basic_access_authentication) as we do 2-2 exchanging code for token.
+
+```text
+POST /v1/api/users
+Host: auth.eks.codebrick.io
+Authorization: Basic {Base64(CLIENT_ID:CLIENT_SECRET)}
+Content-Type: application/json
+
+{
+  "email": "test@tokotalk.com",
+  "password": "password"
+  "name": "John Doe",
+  "phone": "+62 21 12345678"
+}
+
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+
+{
+    "id": "ad73776d-004b-42b7-a725-5aa5fb0ecd74",
+    "new": true
+}
+```
+
+Parameters
+| Name      | Type     | Description                         |
+|-----------|----------|-------------------------------------|
+| email     | `string` | Email address of user.              |
+| password  | `string` | Initial password for the account.   |
+| name      | `string` | Name of user.                       |
+| phone     | `string` | Phone number.                       |
+
+A successful response contains following fields as JSON object.
+
+Response
+| Name      | Type      | Description                                                 |
+|-----------|-----------|-------------------------------------------------------------|
+| id        | `string`  | SSO ID of the user. It is same as `sub` field of ID Token.  |
+| new       | `boolean` | Indicates whether an account is created.                    |
