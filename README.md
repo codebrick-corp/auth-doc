@@ -2,6 +2,25 @@
 
 This guide describes how to integrate Tokotalk Single Sign-On into your application. Tokotalk Single Sign-On service conforms [OpenID Connect](https://openid.net/connect/) specification and operates as OAuth 2.0 authorization server. External documents explaning OAuth 2.0 can be used as supplementary material but this document is prior to others.
 
+## Contents
+
+- [Authenticating the user with Tokotalk Single Sign-On](#authenticating-the-user-with-tokotalk-single-sign-on)
+  - [Contents](#contents)
+  - [Overview](#overview)
+  - [STEP 1: Initiate authorization](#step-1-initiate-authorization)
+    - [1-1. Create an anti-forgery state token](#1-1-create-an-anti-forgery-state-token)
+    - [1-2. Redirect user to /auth endpoint](#1-2-redirect-user-to-auth-endpoint)
+  - [STEP 2: Exchange authorization_code](#step-2-exchange-authorization_code)
+    - [2-1. Confirm anti-forgery state token](#2-1-confirm-anti-forgery-state-token)
+    - [2-2. Exchange code for access_token and ID token](#2-2-exchange-code-for-access_token-and-id-token)
+  - [STEP 3: Obtain identity of the user](#step-3-obtain-identity-of-the-user)
+    - [3-1 Fetch public keys](#3-1-fetch-public-keys)
+    - [3-2 Validate ID token](#3-2-validate-id-token)
+    - [3-3 Create session for your application](#3-3-create-session-for-your-application)
+  - [Logout](#logout)
+  - [Example Application](#example-application)
+  - [Migrating existing user](#migrating-existing-user)
+
 ## Overview
 
 The diagram shows API flow for the user to login to your application using Tokotalk SSO.
@@ -218,7 +237,7 @@ If your application has existing user accounts which were created before SSO is 
 you can create SSO accounts for them through following API.
 It will create a new account and respond its SSO ID.
 
-For authorization, the API must contain `CLIENT_ID` and `CLIENT_SECRET` in [Basic auth header](https://en.wikipedia.org/wiki/Basic_access_authentication) as we do 2-2 exchanging code for token.
+For authorization, the API must contain `CLIENT_ID` and `CLIENT_SECRET` in [Basic auth header](https://en.wikipedia.org/wiki/Basic_access_authentication) as we do [2-2 exchanging code for token](#2-2-exchange-code-for-accesstoken-and-id-token).
 
 ```text
 POST /v1/api/users
