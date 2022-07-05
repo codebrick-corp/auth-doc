@@ -265,7 +265,7 @@ Parameters
 | Name      | Type     | Description                         |
 |-----------|----------|-------------------------------------|
 | email     | `string` | Email address of user.              |
-| password  | `string` | Initial password for the account.   |
+| password  | `string` | Initial password for the account.<br>Password must contain only number and lower case letters and length must be 8 or more.  |
 | name      | `string` | Name of user.                       |
 | phone     | `string` | Phone number.                       |
 
