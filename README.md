@@ -20,6 +20,7 @@ This guide describes how to integrate Tokotalk Single Sign-On into your applicat
   - [Logout](#logout)
   - [Example Application](#example-application)
   - [Migrating existing user](#migrating-existing-user)
+  - [Managing password](#managing-password)
 
 ## Overview
 
@@ -265,7 +266,7 @@ Parameters
 | Name      | Type     | Description                         |
 |-----------|----------|-------------------------------------|
 | email     | `string` | Email address of user.              |
-| password  | `string` | Initial password for the account.<br>Password must contain only number and lower case letters and length must be 8 or more.  |
+| password  | `string` | Initial password for the account.<br>Password must contain 8 or more characters.  |
 | name      | `string` | Name of user.                       |
 | phone     | `string` | Phone number.                       |
 
@@ -276,3 +277,20 @@ Response
 |-----------|-----------|-------------------------------------------------------------|
 | id        | `string`  | SSO ID of the user. It is same as `sub` field of ID Token.  |
 | new       | `boolean` | Indicates whether an account is created.                    |
+
+## Managing password
+
+When the user want to change password, redirect the user to `/password` endpoint.
+The user will be redirect back to `redirect_uri` after changing password.
+
+```text
+GET /password?redirect_uri=https://www.example.com
+
+HTTP/1.1 302 Found
+Location: https://www.example.com
+```
+
+Parameters
+| Name          | Description                                                               |
+|---------------|---------------------------------------------------------------------------|
+| redirect_uri  | The user is redirected back to this location after changing password      |
